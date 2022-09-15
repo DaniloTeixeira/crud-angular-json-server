@@ -3,13 +3,10 @@ table {
 }
 
 mat-toolbar {
-  margin-top: -14px !important;
-  margin-left: -15px;
-  width: 102%;
-
   border-radius: 5px 5px 0 0;
 }
 
 mat-card {
   border-radius: 5px;
+  padding: 0 1px;
 }
