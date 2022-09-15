@@ -3,6 +3,13 @@ table {
 }
 
 mat-toolbar {
-  border-radius: 3px;
-  margin-bottom: 10px;
+  margin-top: -14px !important;
+  margin-left: -15px;
+  width: 102%;
+
+  border-radius: 5px 5px 0 0;
+}
+
+mat-card {
+  border-radius: 5px;
 }
