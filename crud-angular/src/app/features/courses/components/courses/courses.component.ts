@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Course } from './../../models/Course';
+
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.scss']
+  styleUrls: ['./courses.component.scss'],
 })
 export class CoursesComponent implements OnInit {
+  courses: Course[] = [
+    { id: '1', name: 'Angular', category: 'Front-end' },
+    { id: '2', name: 'HTML', category: 'Front-end' },
+    { id: '3', name: 'Java', category: 'Back-end' },
+  ];
 
-  constructor() { }
+  displayedColumns = ['id', 'name', 'category'];
 
-  ngOnInit(): void {
-  }
+  constructor() {}
 
+  ngOnInit(): void {}
 }

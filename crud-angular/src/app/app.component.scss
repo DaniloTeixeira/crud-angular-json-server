@@ -1,3 +1,17 @@
+@import "../assets/scss/variables.scss";
+
 .example-spacer {
   flex: 1 1 auto;
+}
+
+header {
+  height: 120px;
+  background-color: #e91e63;
+}
+
+.nav {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
