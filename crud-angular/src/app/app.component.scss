@@ -1,9 +1,5 @@
 @import "../assets/scss/variables.scss";
 
-.example-spacer {
-  flex: 1 1 auto;
-}
-
 header {
   height: 140px;
   background-color: #e91e63;
@@ -14,4 +10,20 @@ header {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1;
+}
+
+img {
+  height: 160px;
+  width: 160px;
+  position: fixed;
+  top: -11px;
+  left: 19px;
+  z-index: 2;
+}
+
+@media screen and (max-width: 540px) {
+  span {
+    margin-right: 15px;
+  }
 }

@@ -10,3 +10,17 @@ mat-card {
   border-radius: 5px;
   padding: 0;
 }
+
+.spinner-container {
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-icon {
+  vertical-align: middle;
+  margin-left: 10px;
+  color: #e91e63;
+}
