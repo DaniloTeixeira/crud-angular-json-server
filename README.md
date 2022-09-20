@@ -1,2 +1,2 @@
 # crud-angular-spring
-Projeto CRUD utilizando Angular e Spring
+Projeto CRUD utilizando Angular e JSON server
