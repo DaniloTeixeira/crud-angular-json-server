@@ -8,7 +8,7 @@ import { Course } from '../models/Course';
   providedIn: 'root',
 })
 export class CourseService {
-  private readonly url = '/assets/courses.json';
+  private readonly url = 'http://localhost:3000/courses';
 
   constructor(private http: HttpClient) {}
 
