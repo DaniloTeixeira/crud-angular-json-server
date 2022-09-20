@@ -3,11 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppMaterialModule } from './../../shared/app-material/app-material.module';
 import { SharedModule } from './../../shared/shared.module';
+import { CourseFormComponent } from './components/course-form';
 import { CoursesComponent } from './components/courses';
 import { CoursesRoutingModule } from './courses-routing.module';
 
 @NgModule({
-  declarations: [CoursesComponent],
+  declarations: [CoursesComponent, CourseFormComponent],
   imports: [
     CommonModule,
     CoursesRoutingModule,

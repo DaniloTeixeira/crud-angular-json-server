@@ -19,8 +19,17 @@ mat-card {
   align-items: center;
 }
 
-mat-icon {
+.course-icon {
   vertical-align: middle;
   margin-left: 10px;
   color: #e91e63;
+}
+
+.add-button {
+  align-self: flex-start;
+  margin-left: 8rem;
+}
+
+tr.mat-row {
+  height: unset;
 }
