@@ -1,11 +1,45 @@
-<p>course-form works!</p>
-<button
-  mat-stroked-button
-  aria-label="Voltar para cursos"
-  color="primary"
-  class="mb-4"
-  type="button"
-  (click)="onBack()"
->
-  Voltar para cursos
-</button>
+<div class="d-flex flex-column align-items-center">
+  <button
+    mat-stroked-button
+    aria-label="Voltar para cursos"
+    color="primary"
+    class="m-5"
+    type="button"
+    (click)="onBack()"
+  >
+    Voltar para cursos
+  </button>
+
+  <mat-card class="mat-elevation-z8">
+    <mat-toolbar color="primary" class="mb-5">Cadastre seu curso</mat-toolbar>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form" class="m-4">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Curso</mat-label>
+        <input matInput placeholder="Nome do curso" formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Categoria</mat-label>
+        <mat-select formControlName="category">
+          <mat-option value=""> Escolha a categoria </mat-option>
+          <mat-option value="frontend"> Front-end </mat-option>
+          <mat-option value="backend"> Back-end </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="d-flex justify-content-between my-3">
+        <button
+          mat-stroked-button
+          color="secondary"
+          type="button"
+          routerLink="/cursos"
+        >
+          cancelar
+        </button>
+        <button mat-stroked-button color="primary" [disabled]="form.invalid">
+          Salvar
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

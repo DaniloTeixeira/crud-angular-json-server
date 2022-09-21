@@ -15,4 +15,8 @@ export class CourseService {
   getCourses(): Observable<Course[]> {
     return this.http.get<Course[]>(this.url).pipe(delay(2000), take(1));
   }
+
+  saveCourse(payload: Course): Observable<void> {
+    return this.http.post<void>(this.url, { body: payload }).pipe(take(1));
+  }
 }

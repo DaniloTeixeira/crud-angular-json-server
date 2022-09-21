@@ -1,7 +1,33 @@
 {
   "courses": [
-    { "id": "1", "name": "Angular", "category": "Front-end" },
-    { "id": "2", "name": "HTML", "category": "Front-end" },
-    { "id": "3", "name": "Java", "category": "Back-end" }
+    {
+      "id": "1",
+      "name": "Angular",
+      "category": "Front-end"
+    },
+    {
+      "id": "2",
+      "name": "HTML",
+      "category": "Front-end"
+    },
+    {
+      "id": "3",
+      "name": "Java",
+      "category": "Back-end"
+    },
+    {
+      "body": {
+        "name": "C#",
+        "category": "backend"
+      },
+      "id": "oB4ntIs"
+    },
+    {
+      "body": {
+        "name": "C#",
+        "category": "backend"
+      },
+      "id": "KKPjP5y"
+    }
   ]
 }

@@ -1,16 +1,18 @@
 <ng-container *ngIf="courses$ | async as courses; else loading">
-  <div class="d-flex justify-content-center align-items-center flex-column m-5">
+  <div class="d-flex justify-content-center">
     <button
       mat-stroked-button
       aria-label="Adicionar curso"
       color="primary"
-      class="add-button mb-4"
+      class="m-5"
       type="button"
       (click)="onAdd()"
     >
       Adicionar curso
     </button>
+  </div>
 
+  <div class="d-flex justify-content-center">
     <mat-card class="mat-elevation-z8">
       <mat-toolbar color="primary"> Cursos disponíveis </mat-toolbar>
       <table mat-table [dataSource]="courses">
@@ -48,32 +50,12 @@
             <button
               mat-icon-button
               aria-label="Remover curso"
-              style="color: brown"
+              style="color: #cf0040"
             >
               <mat-icon>delete</mat-icon>
             </button>
           </td>
         </ng-container>
-
-        <!-- <ng-container matColumnDef="actions">
-          <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
-          <mat-cell *matCellDef="let course">
-            <button
-              mat-icon-button
-              aria-label="Editar curso"
-              style="color: dodgerblue"
-            >
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button
-              mat-icon-button
-              aria-label="Remover curso"
-              style="color: brown"
-            >
-              <mat-icon>delete</mat-icon>
-            </button>
-          </mat-cell>
-        </ng-container> -->
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
