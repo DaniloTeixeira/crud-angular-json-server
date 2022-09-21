@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormControl, FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { config } from 'rxjs';
 import { SnackBarService } from 'src/app/shared/services';
 
 import { Course } from '../../models/Course';
@@ -15,13 +13,13 @@ import { CourseService } from '../../services';
 })
 export class CourseFormComponent implements OnInit {
   form?: FormGroup<{
-    name: FormControl<string | null>;
-    category: FormControl<string | null>;
+    name: FormControl<string>;
+    category: FormControl<string>;
   }>;
 
   constructor(
     private router: Router,
-    private fb: FormBuilder,
+    private fb: NonNullableFormBuilder,
     private courseService: CourseService,
     private snackBarService: SnackBarService
   ) {}
@@ -57,8 +55,8 @@ export class CourseFormComponent implements OnInit {
 
   private buildForm(): void {
     this.form = this.fb.group({
-      name: this.fb.control('', Validators.required),
-      category: this.fb.control('', Validators.required),
+      name: this.fb.control(''),
+      category: this.fb.control(''),
     });
   }
 
@@ -66,15 +64,8 @@ export class CourseFormComponent implements OnInit {
     const form = this.form?.getRawValue();
 
     return {
-      name: form!.name!,
-      category: form!.category!,
+      name: form!.name,
+      category: form!.category,
     };
-
-    /*
-      -> Alternativas
-        form!.name as string,
-        form!.name ?? '',
-        form!.name || '',
-    */
   }
 }
