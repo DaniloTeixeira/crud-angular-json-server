@@ -5,6 +5,14 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class CategoryPipe implements PipeTransform {
   transform(value: string): string {
-    return value === 'Front-end' ? 'code' : 'computer';
+    if (value === 'Front-end') {
+      return 'code';
+    }
+
+    if (value === 'Back-end') {
+      return 'computer';
+    }
+
+    return 'phone_android';
   }
 }

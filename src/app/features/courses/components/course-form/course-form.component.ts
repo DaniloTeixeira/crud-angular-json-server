@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NonNullableFormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs';
 import { SnackBarService } from 'src/app/shared/services';
 
 import { Course } from '../../models/Course';
@@ -17,8 +18,12 @@ export class CourseFormComponent implements OnInit {
     category: FormControl<string>;
   }>;
 
+  courseId!: number;
+  course?: Course;
+
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private fb: NonNullableFormBuilder,
     private courseService: CourseService,
     private snackBarService: SnackBarService
@@ -26,6 +31,8 @@ export class CourseFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
+    this.loadParams();
+    this.getCourseById();
   }
 
   onBack(): void {
@@ -33,6 +40,10 @@ export class CourseFormComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.saveCourse();
+  }
+
+  private saveCourse(): void {
     const payload = this.getCoursePayload();
 
     this.courseService.saveCourse(payload).subscribe({
@@ -67,5 +78,28 @@ export class CourseFormComponent implements OnInit {
       name: form!.name,
       category: form!.category,
     };
+  }
+
+  private getCourseById(): void {
+    this.courseService.getCourseById(this.courseId).subscribe((course) => {
+      this.course = course;
+
+      if (course) {
+        this.fillForm();
+      }
+    });
+  }
+
+  private fillForm(): void {
+    this.form?.patchValue({
+      name: this.course!.name,
+      category: this.course!.category,
+    });
+  }
+
+  private loadParams(): void {
+    this.route.params.pipe(take(1)).subscribe(({ id }) => {
+      this.courseId = id;
+    });
   }
 }
