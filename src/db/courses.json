@@ -11,9 +11,19 @@
       "category": "Back-end"
     },
     {
-      "id": 3,
-      "name": "teste",
-      "category": "Back-end"
+      "name": "Javascript",
+      "category": "Front-end",
+      "id": 3
+    },
+    {
+      "id": 4,
+      "name": "Flutter",
+      "category": "Mobile"
+    },
+    {
+      "id": 5,
+      "name": "Ionic",
+      "category": "Mobile"
     }
   ]
 }

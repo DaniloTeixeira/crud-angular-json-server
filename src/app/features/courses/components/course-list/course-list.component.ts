@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { SnackBarService } from 'src/app/shared/services';
+import { LoaderService } from 'src/app/shared/services/loader';
+import { SnackBarService } from 'src/app/shared/services/snackbar';
 import { Course } from '../../models/Course';
 
 import { CourseService } from '../../services';
@@ -17,6 +18,7 @@ export class CourseListComponent {
   displayedColumns = ['id', 'name', 'category', 'actions'];
 
   constructor(
+    private loader: LoaderService,
     private courseService: CourseService,
     private snackBarService: SnackBarService
   ) {}
@@ -26,13 +28,20 @@ export class CourseListComponent {
   }
 
   deleteCourse(id: number): void {
-    this.courseService.deleteCourse(id).subscribe({
-      next: () => {
-        this.showSnackBarSuccess();
-        location.reload();
-      },
-      error: () => this.showSnackBarError(),
-    });
+    const msg = 'Apagando curso...';
+
+    this.loader.show(msg);
+
+    this.courseService
+      .deleteCourse(id)
+      .subscribe({
+        next: () => {
+          this.showSnackBarSuccess();
+          location.reload();
+        },
+        error: () => this.showSnackBarError(),
+      })
+      .add(() => this.loader.hide());
   }
 
   private showSnackBarError(): void {

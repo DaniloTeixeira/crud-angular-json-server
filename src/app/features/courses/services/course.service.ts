@@ -14,28 +14,30 @@ export class CourseService {
   constructor(private http: HttpClient) {}
 
   getCourses(): Observable<Course[]> {
-    return this.http.get<Course[]>(this.baseURL).pipe(delay(1000), take(1));
+    return this.http.get<Course[]>(this.baseURL).pipe(delay(500), take(1));
   }
 
   getCourseById(id: string): Observable<Course> {
     const url = `${this.baseURL}/${id}`;
 
-    return this.http.get<Course>(url).pipe(take(1));
+    return this.http.get<Course>(url).pipe(delay(500), take(1));
   }
 
   saveCourse(payload: Course): Observable<void> {
-    return this.http.post<void>(this.baseURL, payload).pipe(take(1));
+    return this.http
+      .post<void>(this.baseURL, payload)
+      .pipe(delay(500), take(1));
   }
 
   editCourse(params: EditCoursePayload, id: string): Observable<void> {
     const url = `${this.baseURL}/${id}`;
 
-    return this.http.put<void>(url, params).pipe(take(1));
+    return this.http.put<void>(url, params).pipe(delay(500), take(1));
   }
 
   deleteCourse(id: number): Observable<void> {
     const url = `${this.baseURL}/${id}`;
 
-    return this.http.delete<void>(url);
+    return this.http.delete<void>(url).pipe(delay(500), take(1));
   }
 }

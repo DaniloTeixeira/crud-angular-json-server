@@ -5,11 +5,10 @@ import {
   NonNullableFormBuilder,
   Validators,
 } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
-import { SnackBarService } from 'src/app/shared/services';
-import { CustomErrorStateMatcher } from 'src/utils/CustomErrorStateMatcher';
+import { LoaderService } from 'src/app/shared/services/loader';
+import { SnackBarService } from 'src/app/shared/services/snackbar';
 
 import { Course } from '../../models/Course';
 import { EditCoursePayload } from '../../models/EditCoursePayload';
@@ -19,12 +18,6 @@ import { CourseService } from '../../services';
   selector: 'app-course-form',
   templateUrl: './course-form.component.html',
   styleUrls: ['./course-form.component.scss'],
-  providers: [
-    {
-      provide: ErrorStateMatcher,
-      useClass: CustomErrorStateMatcher,
-    },
-  ],
 })
 export class CourseFormComponent implements OnInit {
   form?: FormGroup<{
@@ -39,6 +32,7 @@ export class CourseFormComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private loader: LoaderService,
     private fb: NonNullableFormBuilder,
     private courseService: CourseService,
     private snackBarService: SnackBarService
@@ -77,24 +71,36 @@ export class CourseFormComponent implements OnInit {
   }
 
   private saveCourse(): void {
+    const msg = 'Salvando curso...';
     const payload = this.getCoursePayload();
 
-    this.courseService.saveCourse(payload).subscribe({
-      next: () => this.showSnackBarSuccess(),
-      error: () => this.showSnackBarError(),
-    });
+    this.loader.show(msg);
 
-    this.resetForm();
-    this.onBack();
+    this.courseService
+      .saveCourse(payload)
+      .subscribe({
+        next: () => {
+          this.showSnackBarSuccess();
+          this.onBack();
+        },
+        error: () => this.showSnackBarError(),
+      })
+      .add(() => this.loader.hide());
   }
 
   private updateCourse(): void {
+    const msg = 'Atualizando curso...';
     const payload = this.getEditCoursePayload();
 
-    this.courseService.editCourse(payload, this.courseId).subscribe({
-      next: () => this.showSnackBarSuccess(),
-      error: () => this.showSnackBarError(),
-    });
+    this.loader.show(msg);
+
+    this.courseService
+      .editCourse(payload, this.courseId)
+      .subscribe({
+        next: () => this.showSnackBarSuccess(),
+        error: () => this.showSnackBarError(),
+      })
+      .add(() => this.loader.hide());
 
     this.resetForm();
     this.onBack();

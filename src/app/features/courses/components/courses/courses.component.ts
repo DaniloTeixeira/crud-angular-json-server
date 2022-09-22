@@ -9,6 +9,7 @@ import { Course } from '../../models/Course';
 import { CourseService } from '../../services';
 
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog';
+import { LoaderService } from 'src/app/shared/services/loader';
 
 @Component({
   selector: 'app-courses',
@@ -24,6 +25,7 @@ export class CoursesComponent implements OnInit {
     private router: Router,
     private dialog: MatDialog,
     private route: ActivatedRoute,
+    private loader: LoaderService,
     private courseService: CourseService
   ) {}
 
@@ -42,6 +44,10 @@ export class CoursesComponent implements OnInit {
   }
 
   private getCourses(): void {
+    const msg = 'Carregando cursos...';
+
+    this.loader.show(msg);
+
     this.courseService
       .getCourses()
       .pipe(
@@ -53,7 +59,8 @@ export class CoursesComponent implements OnInit {
       .subscribe((courses) => {
         this.courses = courses;
         this.loaded = true;
-      });
+      })
+      .add(() => this.loader.hide());
   }
 
   private onError(errorMsg: string): void {
