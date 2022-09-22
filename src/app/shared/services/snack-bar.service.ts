@@ -9,7 +9,7 @@ export class SnackBarService {
 
   showSnackBarError(msg: string): void {
     this.matSnackBar.open(`${msg}`, 'OK!', {
-      duration: 5000,
+      duration: 3000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
       panelClass: ['snack-error'],
@@ -18,7 +18,7 @@ export class SnackBarService {
 
   showSnackBarSuccess(msg: string): void {
     this.matSnackBar.open(`${msg}`, 'OK!', {
-      duration: 5000,
+      duration: 3000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
       panelClass: ['snack-success'],

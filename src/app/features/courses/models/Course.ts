@@ -1,5 +1,5 @@
-export interface Course {
-  id?: string;
-  name: string;
-  category: string;
+import { EditCoursePayload } from './EditCoursePayload';
+
+export interface Course extends EditCoursePayload {
+  id: number;
 }

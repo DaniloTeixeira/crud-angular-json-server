@@ -23,3 +23,13 @@ mat-toolbar.app-component {
     justify-content: flex-end;
   }
 }
+
+::ng-deep .snack-error {
+  background-color: #a93226;
+  color: #fff;
+}
+
+::ng-deep .snack-success {
+  background-color: #28b463;
+  color: #fff;
+}

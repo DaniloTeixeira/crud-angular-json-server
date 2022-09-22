@@ -18,5 +18,6 @@ import { CourseListComponent } from './components/course-list';
     SharedModule,
     ReactiveFormsModule,
   ],
+  providers: [],
 })
 export class CoursesModule {}

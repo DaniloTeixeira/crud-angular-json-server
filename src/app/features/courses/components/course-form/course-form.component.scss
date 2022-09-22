@@ -13,13 +13,3 @@ mat-card {
 button {
   min-width: 90px;
 }
-
-::ng-deep .snack-error {
-  background-color: darkred;
-  color: #fff;
-}
-
-::ng-deep .snack-success {
-  background-color: darkgreen;
-  color: #fff;
-}

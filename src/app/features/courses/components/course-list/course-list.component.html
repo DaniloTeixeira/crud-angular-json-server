@@ -31,7 +31,12 @@
         <mat-icon>edit</mat-icon>
       </button>
 
-      <button mat-icon-button aria-label="Remover curso" style="color: #cf0040">
+      <button
+        mat-icon-button
+        aria-label="Remover curso"
+        style="color: #cf0040"
+        (click)="deleteCourse(course.id)"
+      >
         <mat-icon>delete</mat-icon>
       </button>
     </mat-cell>
@@ -41,4 +46,12 @@
   <mat-header-row
     *matRowDef="let row; columns: displayedColumns"
   ></mat-header-row>
+
+  <ng-container *ngIf="loaded">
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell text-muted" [attr.colSpan]="displayedColumns.length">
+        Nenhum curso encontrado
+      </td>
+    </tr>
+  </ng-container>
 </mat-table>

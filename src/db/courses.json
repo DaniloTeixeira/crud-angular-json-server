@@ -1,18 +1,18 @@
 {
   "courses": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Angular",
       "category": "Front-end"
     },
     {
-      "id": "2",
-      "name": "HTML",
-      "category": "Front-end"
+      "id": 2,
+      "name": "Java",
+      "category": "Back-end"
     },
     {
-      "id": "3",
-      "name": "Java",
+      "id": 3,
+      "name": "teste",
       "category": "Back-end"
     }
   ]

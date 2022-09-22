@@ -17,6 +17,7 @@
       <mat-toolbar color="primary"> Cursos disponíveis </mat-toolbar>
       <app-course-list
         [courses]="courses"
+        [loaded]="loaded"
         (edit)="editCourse($event)"
       ></app-course-list>
     </mat-card>

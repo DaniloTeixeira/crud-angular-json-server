@@ -1,3 +1,5 @@
+@import "src/styles.scss";
+
 mat-table {
   width: 80vw;
 }
@@ -10,4 +12,10 @@ mat-table {
 
 mat-row {
   height: unset;
+}
+
+td.mat-cell {
+  text-align: center;
+  vertical-align: middle;
+  width: 100vw;
 }

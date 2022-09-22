@@ -1,16 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NonNullableFormBuilder } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  NonNullableFormBuilder,
+  Validators,
+} from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
 import { SnackBarService } from 'src/app/shared/services';
+import { CustomErrorStateMatcher } from 'src/utils/CustomErrorStateMatcher';
 
 import { Course } from '../../models/Course';
+import { EditCoursePayload } from '../../models/EditCoursePayload';
 import { CourseService } from '../../services';
 
 @Component({
   selector: 'app-course-form',
   templateUrl: './course-form.component.html',
   styleUrls: ['./course-form.component.scss'],
+  providers: [
+    {
+      provide: ErrorStateMatcher,
+      useClass: CustomErrorStateMatcher,
+    },
+  ],
 })
 export class CourseFormComponent implements OnInit {
   form?: FormGroup<{
@@ -18,8 +32,9 @@ export class CourseFormComponent implements OnInit {
     category: FormControl<string>;
   }>;
 
-  courseId!: number;
+  courseId!: string;
   course?: Course;
+  courses?: Course[] = [];
 
   constructor(
     private router: Router,
@@ -29,10 +44,24 @@ export class CourseFormComponent implements OnInit {
     private snackBarService: SnackBarService
   ) {}
 
+  get mode(): string {
+    this.getCourses();
+    console.log(this.courses?.length);
+    return this.courseId ? 'update' : 'create';
+  }
+
+  get newCourseId(): number {
+    return this.courses!.length + 1;
+  }
+
   ngOnInit(): void {
     this.buildForm();
     this.loadParams();
-    this.getCourseById();
+    this.getCourses();
+
+    if (this.courseId) {
+      this.getCourseById();
+    }
   }
 
   onBack(): void {
@@ -40,7 +69,11 @@ export class CourseFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.saveCourse();
+    if (this.mode === 'create') {
+      this.saveCourse();
+      return;
+    }
+    this.updateCourse();
   }
 
   private saveCourse(): void {
@@ -50,28 +83,53 @@ export class CourseFormComponent implements OnInit {
       next: () => this.showSnackBarSuccess(),
       error: () => this.showSnackBarError(),
     });
+
+    this.resetForm();
+    this.onBack();
+  }
+
+  private updateCourse(): void {
+    const payload = this.getEditCoursePayload();
+
+    this.courseService.editCourse(payload, this.courseId).subscribe({
+      next: () => this.showSnackBarSuccess(),
+      error: () => this.showSnackBarError(),
+    });
+
+    this.resetForm();
+    this.onBack();
   }
 
   private showSnackBarError(): void {
     const msg = 'Ops... Erro ao salvar curso.';
 
-    this.snackBarService.showSnackBarSuccess(msg);
+    this.snackBarService.showSnackBarError(msg);
   }
 
   private showSnackBarSuccess(): void {
-    const msg = 'Curso salvo com sucesso! :)';
+    const msg = 'Curso salvo com sucesso!';
 
     this.snackBarService.showSnackBarSuccess(msg);
   }
 
   private buildForm(): void {
     this.form = this.fb.group({
-      name: this.fb.control(''),
-      category: this.fb.control(''),
+      name: this.fb.control('', Validators.required),
+      category: this.fb.control('', Validators.required),
     });
   }
 
   private getCoursePayload(): Course {
+    const form = this.form?.getRawValue();
+
+    return {
+      id: this.newCourseId,
+      name: form!.name,
+      category: form!.category,
+    };
+  }
+
+  private getEditCoursePayload(): EditCoursePayload {
     const form = this.form?.getRawValue();
 
     return {
@@ -90,6 +148,12 @@ export class CourseFormComponent implements OnInit {
     });
   }
 
+  private getCourses(): void {
+    this.courseService.getCourses().subscribe((courses) => {
+      this.courses = courses;
+    });
+  }
+
   private fillForm(): void {
     this.form?.patchValue({
       name: this.course!.name,
@@ -101,5 +165,9 @@ export class CourseFormComponent implements OnInit {
     this.route.params.pipe(take(1)).subscribe(({ id }) => {
       this.courseId = id;
     });
+  }
+
+  private resetForm(): void {
+    this.form?.reset();
   }
 }
