@@ -97,13 +97,13 @@ export class CourseFormComponent implements OnInit {
     this.courseService
       .editCourse(payload, this.courseId)
       .subscribe({
-        next: () => this.showSnackBarSuccess(),
+        next: () => {
+          this.showSnackBarSuccess();
+          this.onBack();
+        },
         error: () => this.showSnackBarError(),
       })
       .add(() => this.loader.hide());
-
-    this.resetForm();
-    this.onBack();
   }
 
   private showSnackBarError(): void {
