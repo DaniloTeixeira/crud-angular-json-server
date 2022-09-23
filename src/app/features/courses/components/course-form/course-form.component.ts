@@ -40,7 +40,6 @@ export class CourseFormComponent implements OnInit {
 
   get mode(): string {
     this.getCourses();
-    console.log(this.courses?.length);
     return this.courseId ? 'update' : 'create';
   }
 

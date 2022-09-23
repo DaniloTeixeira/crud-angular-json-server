@@ -11,7 +11,7 @@
       "category": "Back-end"
     },
     {
-      "name": "Javascript",
+      "name": "React",
       "category": "Front-end",
       "id": 3
     },
@@ -24,6 +24,11 @@
       "name": "Ionic",
       "category": "Mobile",
       "id": 5
+    },
+    {
+      "id": 6,
+      "name": "PHP",
+      "category": "Back-end"
     }
   ]
 }

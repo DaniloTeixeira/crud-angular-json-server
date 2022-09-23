@@ -1,17 +1,18 @@
-<div class="d-flex flex-column align-items-center">
-  <button
-    mat-stroked-button
-    aria-label="Voltar para cursos"
-    color="primary"
-    class="m-5"
-    type="button"
-    (click)="onBack()"
-  >
-    Voltar para cursos
-  </button>
-
+<div class="d-flex flex-column align-items-center my-5">
   <mat-card class="mat-elevation-z8">
-    <mat-toolbar color="primary" class="mb-5">Cadastre seu curso</mat-toolbar>
+    <mat-toolbar color="primary" class="mb-5 d-flex justify-content-between">
+      <span>Cadastre seu curso</span>
+      <button
+        mat-mini-fab
+        color="primary"
+        type="button"
+        matTooltip="Voltar para cursos"
+        (click)="onBack()"
+      >
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </mat-toolbar>
+
     <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form" class="m-4">
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Curso</mat-label>
