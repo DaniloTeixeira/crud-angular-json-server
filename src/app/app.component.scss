@@ -1,5 +1,13 @@
 @import "../assets/scss/variables.scss";
 
+.header-container {
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
 header {
   height: 140px;
   background-color: #e91e63;
@@ -7,7 +15,7 @@ header {
 
 .nav {
   width: 100%;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
