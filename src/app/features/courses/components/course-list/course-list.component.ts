@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { MatTable } from '@angular/material/table';
 import { LoaderService } from 'src/app/shared/services/loader';
 import { SnackBarService } from 'src/app/shared/services/snackbar';
 import { Course } from '../../models/Course';
@@ -11,6 +18,7 @@ import { CourseService } from '../../services';
   styleUrls: ['./course-list.component.scss'],
 })
 export class CourseListComponent {
+  @Output() deleted = new EventEmitter();
   @Output() edit = new EventEmitter<Course>();
   @Input() courses?: Course[];
   @Input() loaded!: boolean;
@@ -37,7 +45,7 @@ export class CourseListComponent {
       .subscribe({
         next: () => {
           this.showSnackBarSuccess();
-          location.reload();
+          this.deleted.emit();
         },
         error: () => this.showSnackBarError(),
       })
