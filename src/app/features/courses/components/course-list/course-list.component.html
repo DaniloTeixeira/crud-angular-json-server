@@ -1,7 +1,9 @@
 <mat-table mat-table [dataSource]="courses" *ngIf="courses">
-  <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
-    <mat-cell *matCellDef="let course">{{ course.id }}</mat-cell>
+  <ng-container matColumnDef="id" class="id-column">
+    <mat-header-cell *matHeaderCellDef class="id-column">ID</mat-header-cell>
+    <mat-cell *matCellDef="let course" class="id-column">{{
+      course.id
+    }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="name">
@@ -12,10 +14,10 @@
   <ng-container matColumnDef="category">
     <mat-header-cell *matHeaderCellDef>CATEGORIA</mat-header-cell>
     <mat-cell *matCellDef="let course">
-      {{ course.category }}
       <mat-icon class="course-icon" aria-label="Categoria do Curso">{{
         course.category | category
       }}</mat-icon>
+      {{ course.category }}
     </mat-cell>
   </ng-container>
 

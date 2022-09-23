@@ -6,16 +6,28 @@ mat-table {
 
 .course-icon {
   vertical-align: middle;
-  margin-left: 10px;
+  margin-right: 10px;
   color: #e91e63;
-}
-
-mat-row {
-  height: unset;
 }
 
 td.mat-cell {
   text-align: center;
   vertical-align: middle;
   width: 100vw;
+}
+
+@media screen and (max-width: 540px) {
+  .id-column {
+    display: none;
+  }
+
+  mat-header-cell,
+  mat-cell {
+    padding-left: 22px;
+  }
+
+  mat-cell {
+    display: grid;
+    min-height: unset;
+  }
 }

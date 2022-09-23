@@ -29,10 +29,6 @@ export class CoursesComponent implements OnInit {
     private courseService: CourseService
   ) {}
 
-  get screenWidth(): number {
-    return window.screen.width;
-  }
-
   ngOnInit(): void {
     this.getCourses();
   }
